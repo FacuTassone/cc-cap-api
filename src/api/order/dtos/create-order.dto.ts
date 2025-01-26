@@ -25,7 +25,7 @@ export class CreateOrderDto {
   type: 'MARKET' | 'LIMIT';
 
   @ApiProperty()
-  @IsEnum(['BUY', 'SELL'])
+  @IsEnum(['BUY', 'SELL', 'CASH_IN', 'CASH_OUT'])
   side: 'BUY' | 'SELL' | 'CASH_IN' | 'CASH_OUT';
 
   @ApiProperty({ required: false })
