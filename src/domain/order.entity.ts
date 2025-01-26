@@ -21,7 +21,7 @@ import {
     @JoinColumn({ name: 'userid' })
     user: User;
   
-    @Column()
+    @Column({ type: 'numeric', precision: 10, scale: 2})
     size: number;
   
     @Column({ type: 'numeric', precision: 10, scale: 2, nullable: true })

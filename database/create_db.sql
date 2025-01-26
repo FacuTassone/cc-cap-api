@@ -15,7 +15,7 @@ CREATE TABLE "orders" (
   "id" SERIAL PRIMARY KEY,
   "instrumentid" INT,
   "userid" INT,
-  "size" INT,
+  "size" NUMERIC(10, 2),
   "price" NUMERIC(10, 2),
   "type" VARCHAR(10),
   "side" VARCHAR(10),
