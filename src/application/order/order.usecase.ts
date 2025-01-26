@@ -15,7 +15,7 @@ export class CreateOrderUseCase {
     const { instrumentId, userId, size, totalAmount, price, type, side } = createOrderDto;
 
     let moneda = await this.instrumentRepository.getInstrument('MONEDA');
-  
+
     if (!size && !totalAmount) {
       throw new BadRequestException('Debes proporcionar `size` o `totalAmount`.');
     }
@@ -64,7 +64,7 @@ export class CreateOrderUseCase {
           instrument: { id: moneda.id },
           user: { id: userId },
           size: finalSize * latestPrice,
-          price: latestPrice,
+          price: 1,
           type: 'MARKET',
           side: 'CASH_OUT',
           status: 'FILLED',
@@ -79,7 +79,7 @@ export class CreateOrderUseCase {
           instrument: { id: moneda.id },
           user: { id: userId },
           size: finalSize * latestPrice,
-          price: latestPrice,
+          price: 1,
           type: 'MARKET',
           side: 'CASH_IN',
           status: 'FILLED',

@@ -21,7 +21,7 @@ import { InstrumentRepository } from '../repositories/instrument.repository';
           username: process.env.DB_USER,
           password: process.env.DB_PASSWORD,
           database: process.env.DB_NAME,
-          synchronize: true,
+          synchronize: false,
           ssl: process.env.DB_SSL === 'true',
           entities: [Order, Instrument, MarketData, User],
         });
