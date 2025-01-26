@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: cocos_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./database/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql:ro
+    restart: always
+
+  api:
+    build:
+      context: .
+    ports:
+      - '${API_PORT}:3000'
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db:5432/cocos_db
+    command: npm run start:dev
+
+volumes:
+  postgres_data:

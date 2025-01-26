@@ -1,0 +1,42 @@
+
+Table "users" {
+  "id" SERIAL [pk, increment]
+  "email" VARCHAR(255)
+  "accountnumber" VARCHAR(20) [not null]
+}
+
+Table "instruments" {
+  "id" SERIAL [pk, increment]
+  "ticker" VARCHAR(10)
+  "name" VARCHAR(255)
+  "type" VARCHAR(10)
+}
+
+Table "orders" {
+  "id" SERIAL [pk, increment]
+  "instrumentid" INT
+  "userid" INT
+  "size" INT
+  "price" NUMERIC(10,2)
+  "type" VARCHAR(10)
+  "side" VARCHAR(10)
+  "status" VARCHAR(20)
+  "datetime" TIMESTAMP
+}
+
+Table "marketdata" {
+  "id" SERIAL [pk, increment]
+  "instrumentid" INT
+  "high" NUMERIC(10,2)
+  "low" NUMERIC(10,2)
+  "open" NUMERIC(10,2)
+  "close" NUMERIC(10,2)
+  "previousclose" NUMERIC(10,2)
+  "date" DATE
+}
+
+Ref:"instruments"."id" < "orders"."instrumentid"
+
+Ref:"users"."id" < "orders"."userid"
+
+Ref:"instruments"."id" < "marketdata"."instrumentid"
