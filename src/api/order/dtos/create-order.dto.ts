@@ -26,7 +26,7 @@ export class CreateOrderDto {
 
   @ApiProperty()
   @IsEnum(['BUY', 'SELL'])
-  side: 'BUY' | 'SELL';
+  side: 'BUY' | 'SELL' | 'CASH_IN' | 'CASH_OUT';
 
   @ApiProperty({ required: false })
   @IsOptional()

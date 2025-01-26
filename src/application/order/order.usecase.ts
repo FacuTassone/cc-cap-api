@@ -23,6 +23,10 @@ export class CreateOrderUseCase {
     if (size && totalAmount) {
       throw new BadRequestException('No puedes proporcionar `size` y `totalAmount` simultáneamente.');
     }
+
+    if ((side === 'CASH_IN' || side === 'CASH_OUT') && moneda.id !== instrumentId) {
+      throw new BadRequestException('Solo puedes realizar operaciones de ingreso o egreso de dinero con la moneda.');
+    }
   
     const latestPrice = await this.instrumentRepository.getLatestPrice(instrumentId);
     let finalSize = size;
