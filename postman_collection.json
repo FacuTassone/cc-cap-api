@@ -1,0 +1,311 @@
+{
+	"info": {
+		"_postman_id": "138e4a02-747f-4d21-9953-41e68b523c3a",
+		"name": "cc-cap-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41555369"
+	},
+	"item": [
+		{
+			"name": "Crear una orden de compra",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 1,\r\n  \"instrumentId\": 31,\r\n  \"size\": 20,\r\n  \"type\": \"MARKET\",\r\n  \"side\": \"BUY\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orders"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:3000/orders \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"userId\": 1,\r\n  \"instrumentId\": 50,\r\n  \"size\": 10,\r\n  \"type\": \"MARKET\",\r\n  \"side\": \"BUY\"\r\n}'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Intentar comprar con fondos insuficientes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 1,\r\n  \"instrumentId\": 50,\r\n  \"size\": 10000,\r\n  \"type\": \"MARKET\",\r\n  \"side\": \"BUY\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orders"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:3000/orders \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"userId\": 1,\r\n  \"instrumentId\": 50,\r\n  \"size\": 1000,\r\n  \"type\": \"MARKET\",\r\n  \"side\": \"BUY\"\r\n}'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una orden de venta",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 1,\r\n  \"instrumentId\": 54,\r\n  \"size\": 10,\r\n  \"type\": \"MARKET\",\r\n  \"side\": \"SELL\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orders"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:3000/orders \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"userId\": 1,\r\n  \"instrumentId\": 50,\r\n  \"size\": 5,\r\n  \"type\": \"MARKET\",\r\n  \"side\": \"SELL\"\r\n}'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Intentar vender mas acciones de las que poseo (Rechazada)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 1,\r\n  \"instrumentId\": 50,\r\n  \"size\": 500,\r\n  \"type\": \"MARKET\",\r\n  \"side\": \"SELL\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orders"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:3000/orders \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"userId\": 1,\r\n  \"instrumentId\": 50,\r\n  \"size\": 500,\r\n  \"type\": \"MARKET\",\r\n  \"side\": \"SELL\"\r\n}'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Intentar transferir con un instrumento que no es moneda",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 1,\r\n  \"instrumentId\": 50,\r\n  \"size\": 1000,\r\n  \"type\": \"MARKET\",\r\n  \"side\": \"CASH_IN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orders"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:3000/orders \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"userId\": 1,\r\n  \"instrumentId\": 50,\r\n  \"size\": 1000,\r\n  \"type\": \"MARKET\",\r\n  \"side\": \"CASH_IN\"\r\n}'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Ingresar dinero en moneda",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 1,\r\n  \"instrumentId\": 66, \r\n  \"size\": 10000,\r\n  \"type\": \"MARKET\",\r\n  \"side\": \"CASH_IN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orders"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:3000/orders \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"userId\": 1,\r\n  \"instrumentId\": 1, \r\n  \"size\": 10000,\r\n  \"type\": \"MARKET\",\r\n  \"side\": \"CASH_IN\"\r\n}'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Retirar efectivo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 1,\r\n  \"instrumentId\": 66, \r\n  \"size\": 5000,\r\n  \"type\": \"MARKET\",\r\n  \"side\": \"CASH_OUT\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orders"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:3000/orders \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"userId\": 1,\r\n  \"instrumentId\": 1, \r\n  \"size\": 5000,\r\n  \"type\": \"MARKET\",\r\n  \"side\": \"CASH_OUT\"\r\n}'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener portfolio",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/portfolio/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"portfolio",
+						"1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X GET http://localhost:3000/portfolio/1\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar un instrumento por ticker o nombre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/instruments?query=MET",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"instruments"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "MET"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X GET \"http://localhost:3000/instruments?query=DYCA\"\r\n"
+			},
+			"response": []
+		}
+	]
+}
