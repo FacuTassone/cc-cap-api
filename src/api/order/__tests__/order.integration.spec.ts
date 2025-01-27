@@ -61,7 +61,7 @@ describe('Orders API (e2e)', () => {
     const createdOrder = await orderRepo.findOne({ where: { id: response.body.id } });
 
     expect(createdOrder).not.toBeNull();
-    expect(createdOrder.size).toBe(1);
+    expect(createdOrder.size).toBe("1.00");
     expect(createdOrder.status).toBe('FILLED');
   });
 

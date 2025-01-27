@@ -15,7 +15,7 @@ export class CreateOrderUseCase {
     const { instrumentId, userId, size, totalAmount, price, type, side } = createOrderDto;
 
     let moneda = await this.instrumentRepository.getInstrument('MONEDA');
-
+    const MONEDA_PRICE = 1;
     if (!size && !totalAmount) {
       throw new BadRequestException('Debes proporcionar `size` o `totalAmount`.');
     }
@@ -27,8 +27,10 @@ export class CreateOrderUseCase {
     if ((side === 'CASH_IN' || side === 'CASH_OUT') && moneda.id !== instrumentId) {
       throw new BadRequestException('Solo puedes realizar operaciones de ingreso o egreso de dinero con la moneda.');
     }
-  
-    const latestPrice = await this.instrumentRepository.getLatestPrice(instrumentId);
+    let latestPrice = MONEDA_PRICE;
+    if (moneda.id !== instrumentId) {
+      latestPrice = await this.instrumentRepository.getLatestPrice(instrumentId);
+    }
     let finalSize = size;
   
     if (totalAmount) {
@@ -64,7 +66,7 @@ export class CreateOrderUseCase {
           instrument: { id: moneda.id },
           user: { id: userId },
           size: finalSize * latestPrice,
-          price: 1,
+          price: MONEDA_PRICE,
           type: 'MARKET',
           side: 'CASH_OUT',
           status: 'FILLED',
@@ -79,7 +81,7 @@ export class CreateOrderUseCase {
           instrument: { id: moneda.id },
           user: { id: userId },
           size: finalSize * latestPrice,
-          price: 1,
+          price: MONEDA_PRICE,
           type: 'MARKET',
           side: 'CASH_IN',
           status: 'FILLED',
